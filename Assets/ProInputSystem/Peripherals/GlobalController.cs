@@ -232,8 +232,10 @@ namespace ProInputSystem {
             }
 
             if (LeftStick.IsActive()) {
+                
                 _globalStick.Angle = LeftStick.Angle;
                 _globalStick.Distance = LeftStick.Distance;
+                //ADD X AND Y.
             }
             else if (_dpadStick.IsActive()) {
                 _globalStick.Angle = _dpadStick.Angle;

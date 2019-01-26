@@ -59,7 +59,7 @@ namespace ProInputSystem {
             Select = new ButtonModel(AccessType.CONTROLLER, 9),
         };
 
-        public static readonly ControllerProfile XBOX_360_PC = new ControllerProfile{
+        public static readonly ControllerProfile XBOX_360_PC_WIRELESS = new ControllerProfile{
             Name = "XBOX 360 PC",
             UpDpad = new ButtonModel(AccessType.CONTROLLER, 6, ButtonType.ANALOGUE),
 			DownDpad = new ButtonModel(AccessType.CONTROLLER, 6, ButtonType.ANALOGUE_REVERSED),
@@ -82,6 +82,30 @@ namespace ProInputSystem {
             Start = new ButtonModel(AccessType.CONTROLLER, 7),
             Select = new ButtonModel(AccessType.CONTROLLER, 6),
 		};
+
+        public static readonly ControllerProfile XBOX_360_PC = new ControllerProfile {
+            Name = "XBOX 360 PC",
+            UpDpad = new ButtonModel(AccessType.CONTROLLER, 6, ButtonType.ANALOGUE),
+            DownDpad = new ButtonModel(AccessType.CONTROLLER, 6, ButtonType.ANALOGUE_REVERSED),
+            LeftDpad = new ButtonModel(AccessType.CONTROLLER, 5, ButtonType.ANALOGUE_REVERSED),
+            RightDpad = new ButtonModel(AccessType.CONTROLLER, 5, ButtonType.ANALOGUE),
+            A = new ButtonModel(AccessType.CONTROLLER, 0),
+            B = new ButtonModel(AccessType.CONTROLLER, 1),
+            X = new ButtonModel(AccessType.CONTROLLER, 2),
+            Y = new ButtonModel(AccessType.CONTROLLER, 3),
+            L = new ButtonModel(AccessType.CONTROLLER, 4),
+            R = new ButtonModel(AccessType.CONTROLLER, 5),
+            L2 = new ButtonModel(AccessType.CONTROLLER, 2, ButtonType.ANALOGUE),
+            R2 = new ButtonModel(AccessType.CONTROLLER, 2, ButtonType.ANALOGUE_REVERSED),
+            XAxisRight = new ButtonModel(AccessType.CONTROLLER, 3, ButtonType.ANALOGUE),
+            YAxisRight = new ButtonModel(AccessType.CONTROLLER, 4, ButtonType.ANALOGUE),
+            XAxisLeft = new ButtonModel(AccessType.CONTROLLER, 0, ButtonType.ANALOGUE),
+            YAxisLeft = new ButtonModel(AccessType.CONTROLLER, 1, ButtonType.ANALOGUE),
+            JoyClickLeft = new ButtonModel(AccessType.CONTROLLER, 8),
+            JoyClickRight = new ButtonModel(AccessType.CONTROLLER, 9),
+            Start = new ButtonModel(AccessType.CONTROLLER, 7),
+            Select = new ButtonModel(AccessType.CONTROLLER, 6),
+        };
 
         public static readonly ControllerProfile PC_MAC = new ControllerProfile {
             Name = "KEYBOARD",

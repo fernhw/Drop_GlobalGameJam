@@ -80,6 +80,8 @@ public static class ProInput {
                 }
             }
         }
+
+        //improve in main
         UpdateControllerInput(delta);
 
     }
