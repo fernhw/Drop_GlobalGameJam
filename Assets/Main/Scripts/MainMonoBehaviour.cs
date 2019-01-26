@@ -56,7 +56,7 @@ public class MainMonoBehaviour : MonoBehaviour
             camY = camPosition.y,
             camZ = camPosition.z
             ;
-
+        
         print(stick.Distance);
         if (stick.IsActive()) {
             float stickAngle = stick.Angle;

@@ -1,0 +1,20 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:7e403b794fb2cb6cceebbbf5017d94f7:755f3504c64ff55ff96fb09be0c138e5:5408b589c8c7db160c8ae29004382b5e$
+#
+:format=40300
+:texture=arboles.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+
+Arbol Background %231;1777;651;228;1391; 0.5;0.5; 0;0;0;0
+Arbol Background %232;1504;640;273;1402; 0.5;0.5; 0;0;0;0
+Arbol Foreground %231;795;611;391;1431; 0.5;0.5; 0;0;0;0
+Arbol Foreground %232;281;610;514;1432; 0.5;0.5; 0;0;0;0
+Arbol Middle Background %231;1186;622;318;1420; 0.5;0.5; 0;0;0;0
+Arbol Middle Background %232;6;609;275;1433; 0.5;0.5; 0;0;0;0
