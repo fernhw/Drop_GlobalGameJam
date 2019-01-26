@@ -3,10 +3,13 @@ importPivots: 1
 tpsheetFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 - Assets/Main/Art/arboles.tpsheet
+- Assets/Main/Art/Arbustos Sprite Sheet.tpsheet
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Main/Art/arboles.png
+- Assets/Main/Art/Arbustos Sprite Sheet.png
 normalmapFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
 - 
 enableDebugOutput: 0

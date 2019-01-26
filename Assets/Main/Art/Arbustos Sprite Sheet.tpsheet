@@ -1,0 +1,28 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:6b54f26098eb75c64a824cb4aa599c9f:530b90352b4c07e9bb478ea2891276a6:f08df3240c32dd1065090ad44d9aec0f$
+#
+:format=40300
+:texture=Arbustos Sprite Sheet.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+
+Arbusto Fondo %231;357;1325;494;343; 0.5;0.5; 0;0;0;0
+Arbusto Fondo %232;4;1246;351;422; 0.5;0.5; 0;0;0;0
+Arbusto Fondo %233;4;135;303;334; 0.5;0.5; 0;0;0;0
+Arbusto Fondo %234;4;471;316;366; 0.5;0.5; 0;0;0;0
+Arbusto Fondo %235;4;839;291;405; 0.5;0.5; 0;0;0;0
+Arbusto Front %231;623;802;276;258; 0.5;0.5; 0;0;0;0
+Arbusto Front %232;297;900;230;344; 0.5;0.5; 0;0;0;0
+Arbusto Front %233;322;637;299;261; 0.5;0.5; 0;0;0;0
+Arbusto Front %234;309;136;370;333; 0.5;0.5; 0;0;0;0
+Arbusto Front %235;901;856;366;209; 0.5;0.5; 0;0;0;0
+Arbusto Front %236;828;1067;276;256; 0.5;0.5; 0;0;0;0
+Arbusto Front %237;529;1062;297;261; 0.5;0.5; 0;0;0;0
+Arbusto Front %238;623;589;285;211; 0.5;0.5; 0;0;0;0
+Foreground Bushes;4;1670;1817;374; 0.5;0.5; 0;0;0;0
