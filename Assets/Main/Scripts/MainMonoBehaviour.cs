@@ -9,12 +9,28 @@ public class MainMonoBehaviour : MonoBehaviour
     const float HALF_PI = (Mathf.PI*0.5f);
     const float PI_X2 = (Mathf.PI*2);
     const float PI_45D = PI_X2/8;
-
+    static readonly Vector3 zero = new Vector3(0,0,0);
 
     [SerializeField]
-    float JOYSTICK_RUN = .6f;  
+    float FLAME_SPEED = .1f;
+    [SerializeField]
+    float FLAME_HIT = .1f;
+    [SerializeField]
+    float FLAME_EFFECT_HIT = .1f;
+
+    [SerializeField]
+    float JOYSTICK_RUN = .6f;
+    [SerializeField]
+    float CAM_SHAKE_TIME = .2f;
+    [SerializeField]
+    float CAM_SHAKE_RECOVER = .2f;
+    [SerializeField]
+    float CAM_SHAKE_TIME_INTERV = 1/24; //movie fps
+
     [SerializeField]
     float CHAR_SPEED = 7;
+    [SerializeField]
+    float CAM_SHAKE_POWER = 1;
     [SerializeField]
     float CHAR_SPEED_RUN = 7;
     [SerializeField]
@@ -27,19 +43,40 @@ public class MainMonoBehaviour : MonoBehaviour
     float CAM_LIMIT_X_POS = 51;
     [SerializeField]
     Vector3 CHAR_SIZE = new Vector3(10,10,10);
-
+   
 
     [SerializeField]
     GameObject character;
     [SerializeField]
-    Camera camera;
+    Camera mainCam;
+    [SerializeField]
+    GameObject mainCamContainer;
+    [SerializeField]
+    AnimationManager dropAnimationManager;
 
     [SerializeField]
     float deltaModifier = 1;
+    [SerializeField]
+    float difficulty = 1;
 
     Vector3 ogCamCharComparison = new Vector3();
     List<Obstacle> obstacles;
     List<Parent> parents;
+    CharacterState charState = CharacterState.IDLE;
+    float preCharX, preCharZ;
+    float deltaRun;
+    float
+        charX,
+        charY,
+        charZ,
+        camX,
+        camY,
+        camZ;
+    float shakeScreenTime = 0;
+
+    bool hitActionButton;
+    bool ifHitPending = false;
+
     void Start(){
         ProInput.Init();
 
@@ -48,26 +85,21 @@ public class MainMonoBehaviour : MonoBehaviour
         parents = AllOfClass.PickAllOf<Parent>();
 
         //Camera setup
-        ogCamCharComparison =  character.transform.localPosition - camera.transform.localPosition;
+        ogCamCharComparison =  character.transform.localPosition - mainCamContainer.transform.localPosition;
+
+        //init
+        charState = CharacterState.IDLE; // CHANGE FOR OP
+        ManageAnimations();
     }
-
-    float preCharX, preCharZ;
-
-    float
-        charX,
-        charY,
-        charZ,
-        camX,
-        camY,
-        camZ;
-
+   
     void Update() {
         float deltaBase = Time.deltaTime;
-        float deltaRun = deltaBase * deltaModifier;
+        deltaRun = deltaBase * deltaModifier;
         ProInput.UpdateInput(deltaRun, debug: true);
 
         Vector3 charPosition = character.transform.localPosition;
-        Vector3 camPosition = camera.transform.localPosition;
+        Vector3 camPosition = mainCamContainer.transform.localPosition;
+
 
         AnalogueInput stick = ProInput.GlobalActionStick;
 
@@ -84,6 +116,10 @@ public class MainMonoBehaviour : MonoBehaviour
 
         hitActionButton = ProInput.A;
 
+        if (hitActionButton) {
+            charState = CharacterState.HEAD_BONK;
+        }
+
         if (stick.IsActive() && !hitActionButton) {
             float stickAngle = stick.Angle;
             float stickCos = Mathf.Cos(stickAngle);
@@ -97,48 +133,74 @@ public class MainMonoBehaviour : MonoBehaviour
                 charX += stickCos * CHAR_SPEED * deltaRun;
                 charZ -= stickSin * CHAR_SPEED * deltaRun;
             }
+            charState = CharacterState.WALK;
         }
 
-        if (hitActionButton) {
-
+        if (!stick.IsActive() && !hitActionButton) {
+            charState = CharacterState.IDLE;
         }
-
-        Parents();
-        Collisions();
+        
+        Flames();
+        DealWithCollisions();
         ManageCamera();
+        ManageAnimations();
 
         Vector3 newPos = new Vector3(charX, charY, charZ);
         character.transform.localPosition = newPos;
         Vector3 newcamPos = new Vector3(camX, camY, camZ);
-        camera.transform.localPosition = newcamPos;
+        mainCamContainer.transform.localPosition = newcamPos;
     }
-    bool hitActionButton;
-    bool ifHitPending = false;
-    private void Parents() {
+
+    CharacterState oldCharacterState = CharacterState.IDLE  ;
+    private void ManageAnimations() {
+        if (charState != oldCharacterState) {  
+            oldCharacterState = charState;
+            int animId = (int)charState;
+            dropAnimationManager.JumpTo(Drop.anims[animId]);
+        }
+    }
+
+    private void Flames() {
         bool anyHitsCollisionOrButton = false;
-        int parentNum = parents.Count;    
+        int parentNum = parents.Count;
         for (int i = 0; i<parentNum; i++) {
             Parent parent = parents[i];
-            Transform obsTrans = parent.transform;
-            Vector3 obsPos = parent.flamePivot.transform.localPosition;
-            Vector3 obsScale = obsTrans.localScale;
-            float obsX = obsPos.x;
-            float obsZ = obsPos.z;
-            float obsWidthHalf = obsScale.x*.5f + CHAR_SIZE.x*.5f;
-            float obsDepthHalf = obsScale.z*.5f + CHAR_SIZE.z*.5f;
-            if (charX > obsX - obsWidthHalf &&
-                charX < obsX + obsWidthHalf &&
-                charZ > obsZ - obsDepthHalf &&
-                charZ < obsZ + obsDepthHalf) {
-                anyHitsCollisionOrButton = true;
-                if (hitActionButton) {                    
-                    if (ifHitPending) {
-                        ifHitPending = false;   
-                        print("HIT PARENT");
+
+            if (parent.active) {
+                parent.flame.percentage += deltaRun* FLAME_SPEED*difficulty;
+                Transform obsTrans = parent.transform;
+                Vector3 obsPos = parent.flamePivot.transform.localPosition;
+                Vector3 obsScale = obsTrans.localScale;
+                float obsX = obsPos.x;
+                float obsZ = obsPos.z;
+                float obsWidthHalf = obsScale.x*.5f + CHAR_SIZE.x*.5f;
+                float obsDepthHalf = obsScale.z*.5f + CHAR_SIZE.z*.5f;
+                if (charX > obsX - obsWidthHalf &&
+                    charX < obsX + obsWidthHalf &&
+                    charZ > obsZ - obsDepthHalf &&
+                    charZ < obsZ + obsDepthHalf) {
+                    anyHitsCollisionOrButton = true;
+                    if (hitActionButton) {
+                        if (ifHitPending) {
+                            ifHitPending = false;
+                            print("HIT PARENT");
+                            ShakeCam();
+                            parent.flame.percentage -= FLAME_HIT;
+                            parent.flame.actualFlame += FLAME_EFFECT_HIT;
+                            if (parent.flame.percentage>1) {
+                                parent.flame.percentage = 1;
+                            }
+                            
+                        }
                     }
                 }
+                if (parent.flame.percentage<0) {
+                    parent.active = false;
+                }
             }
+            parent.flame.ShowFlames(deltaRun);
         }
+       
         if (hitActionButton) {
             anyHitsCollisionOrButton = true;
             ifHitPending = false;
@@ -166,9 +228,36 @@ public class MainMonoBehaviour : MonoBehaviour
         }
         camX = (camX+(charX-ogCamCharComparison.x))*.5f;
         camZ = (camZ+(charZ-ogCamCharComparison.z))*.5f;
+
+        if (shakeScreenTime>=0) {
+            Vector3 camInternalCam = mainCam.transform.localPosition;
+            if (camInternalCam.y == 0) {
+                camInternalCam.y = CAM_SHAKE_POWER;
+            } else {
+                if (shakeScreenTime>CAM_SHAKE_TIME_INTERV) {
+                    shakeScreenTime = 0;
+                    if (camInternalCam.y == CAM_SHAKE_POWER) {
+                        camInternalCam.y = -CAM_SHAKE_POWER;
+                    } else {
+                        camInternalCam.y = CAM_SHAKE_POWER;
+                    }
+                } else {
+                    shakeScreenTime += deltaRun;
+                }
+            }
+            mainCam.transform.localPosition = new Vector3(camInternalCam.x, camInternalCam.y, camInternalCam.z);
+            shakeScreenTime -= CAM_SHAKE_RECOVER;            
+        } else {
+            mainCam.transform.localPosition = zero;
+        }
+
     }
 
-    private void Collisions() {
+    public void ShakeCam() {
+        shakeScreenTime = CAM_SHAKE_TIME;
+    }
+
+    private void DealWithCollisions() {
         int obstacleNum = obstacles.Count;
         for (int i = 0; i<obstacleNum; i++) {
             Obstacle obstacle = obstacles[i];
@@ -277,7 +366,6 @@ public class MainMonoBehaviour : MonoBehaviour
                charX < obsX +  widthH &&
                charZ > obsZ - depthH &&
                charZ < obsZ + depthH) {
-                print(quadrantProblem.ToString());
                 switch (quadrantProblem) {
                     case QuadProblem.UP:
                         charZ += 0.1f;
@@ -307,4 +395,25 @@ enum QuadProblem {
     UP = 1,
     RIGHT =2,
     DOWN = 3
+}
+
+public enum CharacterState {
+    IDLE = 0,
+    WALK = 1,
+    HEAD_BONK = 2,
+    INTRO_SLEEP = 3,
+    INTRO_WAKING_UP = 4,
+    NULL = 0
+}
+
+public static class Drop {
+    public const string
+    IDLE = "drop_idle",
+    WALK = "drop_walk",
+    HEAD_BONK = "drop_head",
+    INTRO_SLEEP = "sleep_idle",
+    INTRO_WAKING_UP = "wake_up_wake_up_mister_drop";
+    public static readonly string[] anims = new string[]{
+        IDLE,WALK,HEAD_BONK,INTRO_SLEEP,INTRO_WAKING_UP
+    };
 }

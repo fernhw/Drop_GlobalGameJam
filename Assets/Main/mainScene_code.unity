@@ -1027,6 +1027,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+--- !u!1 &143822142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143822143}
+  m_Layer: 0
+  m_Name: camPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &143822143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143822142}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 19.5, z: -32.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2035190731}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!1 &144300269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,7 +1523,7 @@ PrefabInstance:
     - target: {fileID: 2365485078052991575, guid: 809ed3837f4aae54ea103ac7fe1bb40f,
         type: 3}
       propertyPath: active
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 809ed3837f4aae54ea103ac7fe1bb40f, type: 3}
@@ -3920,6 +3951,7 @@ GameObject:
   - component: {fileID: 811336288}
   - component: {fileID: 811336290}
   - component: {fileID: 811336289}
+  - component: {fileID: 811336291}
   m_Layer: 0
   m_Name: drop
   m_TagString: Untagged
@@ -3997,7 +4029,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: b78e1634bc6342540a6c766cb540caba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b78e1634bc6342540a6c766cb540caba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4008,6 +4040,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &811336291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811336287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2830b872c6b4ac499dfcb4dae9f7f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startExisting: 1
+  animated: 1
+  alwaysExist: 0
+  introAnimation: drop_idle
+  outroAnimation: 
 --- !u!1 &813303619
 GameObject:
   m_ObjectHideFlags: 0
@@ -5756,6 +5805,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: flame (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365485078052991575, guid: 809ed3837f4aae54ea103ac7fe1bb40f,
+        type: 3}
+      propertyPath: active
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 809ed3837f4aae54ea103ac7fe1bb40f, type: 3}
@@ -9613,14 +9667,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035190728}
-  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 19.5, z: -32.3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9270027}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
+  m_Father: {fileID: 143822143}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2056466076
 GameObject:
   m_ObjectHideFlags: 0
@@ -9650,8 +9704,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fb6bcd9e8583b4ea14131c5dd72132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FLAME_SPEED: 0.1
+  FLAME_HIT: 0.1
+  FLAME_EFFECT_HIT: 0.1
   JOYSTICK_RUN: 0.99
+  CAM_SHAKE_TIME: 0.2
+  CAM_SHAKE_RECOVER: 0.2
+  CAM_SHAKE_TIME_INTERV: 0
   CHAR_SPEED: 5
+  CAM_SHAKE_POWER: 0.2
   CHAR_SPEED_RUN: 12
   CAM_LIMIT_Z_NEG: -51
   CAM_LIMIT_Z_POS: -30
@@ -9659,8 +9720,11 @@ MonoBehaviour:
   CAM_LIMIT_X_POS: 18
   CHAR_SIZE: {x: 2, y: 1, z: 2}
   character: {fileID: 2113441596}
-  camera: {fileID: 2035190730}
+  mainCam: {fileID: 2035190730}
+  mainCamContainer: {fileID: 143822142}
+  dropAnimationManager: {fileID: 811336291}
   deltaModifier: 1
+  difficulty: 1
 --- !u!4 &2056466078
 Transform:
   m_ObjectHideFlags: 0
@@ -10566,6 +10630,16 @@ PrefabInstance:
     - target: {fileID: 2365485078052991575, guid: 809ed3837f4aae54ea103ac7fe1bb40f,
         type: 3}
       propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537611390522966443, guid: 809ed3837f4aae54ea103ac7fe1bb40f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365485078635588757, guid: 809ed3837f4aae54ea103ac7fe1bb40f,
+        type: 3}
+      propertyPath: percentage
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

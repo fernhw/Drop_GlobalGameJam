@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Flame : MonoBehaviour
 {
+    const float
+         REAL_PERCENTAGE = .5f,
+         FLAME_ADJUST_SPEED = 1f;
     public List<GameObject> flames;
     [Range(0,1)]
+
     public float percentage = 0;
     public SpriteRenderer glow;
 
-    public void ShowFlames() {
+    public float actualFlame = 0;
+
+    public void ShowFlames(float delta) {
         int flameCount = flames.Count;
         int flamesToShow = Mathf.RoundToInt(flameCount*percentage);
         for (int i = 0; i<flameCount; i++) {
@@ -20,10 +26,13 @@ public class Flame : MonoBehaviour
                 flame.SetActive(false);
             }
         }
-        glow.color = new Vector4(percentage, percentage, percentage,1);
+        if (actualFlame>percentage*REAL_PERCENTAGE) {
+            actualFlame -= FLAME_ADJUST_SPEED*delta;
+        }
+        if (percentage*REAL_PERCENTAGE>actualFlame) {
+            actualFlame = percentage*REAL_PERCENTAGE;
+        }
+        glow.color = new Vector4(actualFlame, actualFlame, actualFlame, 1);
     }
 
-    private void Update() {
-        ShowFlames();
-    }
 }

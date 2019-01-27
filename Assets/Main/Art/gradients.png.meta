@@ -5,6 +5,7 @@ TextureImporter:
     21300000: grad_1
     21300002: grad_2
     21300004: grad_4
+    21300006: jacobladder
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -79,8 +80,8 @@ TextureImporter:
       name: grad_1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 126
+        x: 259
+        y: 896
         width: 127
         height: 127
       alignment: 9
@@ -90,7 +91,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fbd605e72353914ead18884c67369bb
+      spriteID: b58dc3ba5698628439d51d807ab05778
       vertices: []
       indices: 
       edges: []
@@ -100,7 +101,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 255
+        y: 253
         width: 256
         height: 256
       alignment: 0
@@ -110,7 +111,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff66ddc99496d7244ab13bb87ead2855
+      spriteID: c736a5c9aa9da444d8dbc0d154a937c0
       vertices: []
       indices: 
       edges: []
@@ -119,8 +120,8 @@ TextureImporter:
       name: grad_4
       rect:
         serializedVersion: 2
-        x: 130
-        y: 126
+        x: 259
+        y: 767
         width: 127
         height: 127
       alignment: 9
@@ -130,7 +131,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdaa89941bbb7d7408233d17f69a8297
+      spriteID: 95461d5e980343f4daf23903a4d8e5dc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jacobladder
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 511
+        width: 256
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbc65593b984c1c4092c862757471a40
       vertices: []
       indices: 
       edges: []
