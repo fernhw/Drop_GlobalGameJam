@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProInputSystem;
 using System;
+using UnityEngine.SceneManagement;
 
 public class MainMonoBehaviour:MonoBehaviour {
     const float HALF_PI = (Mathf.PI*0.5f);
@@ -93,6 +94,11 @@ public class MainMonoBehaviour:MonoBehaviour {
     [SerializeField]
     GameObject particlesHappy;
     [SerializeField]
+    GameObject homeReminder;
+    [SerializeField]
+    GameObject winReminder;
+
+    [SerializeField]
     AnimationManager dropAnimationManager;
 
     [SerializeField]
@@ -136,7 +142,8 @@ public class MainMonoBehaviour:MonoBehaviour {
         particlesHappy.SetActive(false);
         //Camera setup
         ogCamCharComparison =  character.transform.localPosition - mainCamContainer.transform.localPosition;
-
+        homeReminder.SetActive(false);
+        winReminder.SetActive(false);
         //init
         charState = CharacterState.IDLE; // CHANGE FOR OP
         ManageAnimations();
@@ -248,6 +255,12 @@ public class MainMonoBehaviour:MonoBehaviour {
                         case 4:
                             possibilities = FLAME_POSSIBILITY_Z4;
                             break;
+                        case 5:
+                            possibilities = FLAME_POSSIBILITY_Z4;
+                            break;
+                        default:
+                            possibilities = 999999999999999;
+                            break;
                     }
                     if (Mathf.RoundToInt(UnityEngine.Random.value*possibilities) == 0) {
                         flameObj.Activate();
@@ -280,9 +293,14 @@ public class MainMonoBehaviour:MonoBehaviour {
                         flameObj.timer = LIGHT_TIME_SECONDS - LIGHT_BONUS_TIME;
                     }
                     if (flameObj.timer > LIGHT_TIME_SECONDS) {
-                        flameObj.state = FlameState.FIRE_ON;                        
-                        flameObj.flame.actualFlame = FLAME_SHOWS_UP_ALPHA;
-                        ShakeCam(CAM_SHAKE_TIME,true);
+                        //if not winned
+                        if (difficulty == 5 && killCount>WIN_QUOTA) {
+                        } else {
+                            flameObj.state = FlameState.FIRE_ON;
+                            flameObj.flame.actualFlame = FLAME_SHOWS_UP_ALPHA;
+                            ShakeCam(CAM_SHAKE_TIME, true);
+                        }
+                       
                     }
                     float shinePerc = flameObj.timer;
                     if (shinePerc > LIGHT_ALPHA_LIMIT) {
@@ -315,8 +333,8 @@ public class MainMonoBehaviour:MonoBehaviour {
                     }
                     if (flameObj.flame.percentage>1) {
                         flameObj.flame.percentage = 1;
-                        flameObj.state = FlameState.OH_NO;
-                        print("DEAD");
+                        flameObj.state = FlameState.OH_NO;                        
+                        SceneManager.LoadScene("Game_over");
                         flameObj.flame.actualFlame = 100;
                         ShakeCam(CAM_SHAKE_TIME_DEATH);
                     }
@@ -345,25 +363,38 @@ public class MainMonoBehaviour:MonoBehaviour {
             particlesHappy.SetActive(false);
         }
     }
-    
+    int killsSinceHomeMessage = 0;
     private void KilledOne() {
+        bool levelSwap = false;
         killCount++;
         if (difficulty == 1 && killCount>LEVEL_ONE_QUOTA) {
+            levelSwap = true;
             difficulty++;
         }
         if (difficulty == 2 && killCount>LEVEL_TWO_QUOTA) {
+            levelSwap = true;
             difficulty++;
         }
         if (difficulty == 3 && killCount>LEVEL_THREE_QUOTA) {
+            levelSwap = true;
             difficulty++;
         }
         if (difficulty == 4 && killCount>LEVEL_FOUR_QUOTA) {
+            levelSwap = true;
             difficulty++;
         }
         if (difficulty == 5 && killCount>WIN_QUOTA) {
-            print("WIN GAME asdfghjkgfahaehj");
-        }
+            homeReminder.SetActive(false);
+            winReminder.SetActive(true);
 
+        }
+        if (levelSwap) {
+            homeReminder.SetActive(true);
+            killsSinceHomeMessage = killCount;
+        }
+        if (killCount > killsSinceHomeMessage + 1) {
+            homeReminder.SetActive(false);
+        }
     }
 
     private void SetupFlames() {

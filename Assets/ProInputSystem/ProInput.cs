@@ -48,6 +48,7 @@ public static class ProInput {
     static bool waitingForKeyPress = false;
     static DirectionalKeys _globalDPad;    
 	static Button debugButton, testButton;
+    static bool innited = false;
 
     /// <summary>
     /// IMPORTANT: Initialize the system before running.
@@ -55,13 +56,15 @@ public static class ProInput {
     /// <para>ProInput.UpdateInput(float delta, bool debug)</para>
     /// </summary>
     public static void Init() {
-
+        if (innited)
+            return;
+        innited = true;
         Main = new GlobalController(ControllerHub.MainController, ControllerHub.PCInput, ControllerHub.PCInputAlt);
 		debugButton = new Button(DebugKeys.MAPPING_KEY);
 		testButton = new Button(DebugKeys.TEST_KEY);
         _globalDPad = new DirectionalKeys();
-
     }
+
     /// <summary>
     /// Run this in your game Loop, it executes all the logic of ProInput system
     /// <para>This is needed for the joysticks and Emulator systems.</para>
