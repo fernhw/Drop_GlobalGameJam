@@ -1,0 +1,20 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:4c8afa253b20ee49f61c3a0f2b9fae19:83d8f2efc70952f81a049675d205ff29:64d56465927d50bb5400e4c66dc46a97$
+#
+:format=40300
+:texture=UI.png
+:size=2048x512
+:pivotpoints=enabled
+:borders=disabled
+
+Credits;1;8;132;32; 0.5;0.5; 0;0;0;0
+dropped dead;1;111;540;400; 0.5;0.5; 0;0;0;0
+poster bg;543;151;640;360; 0.5;0.5; 0;0;0;0
+Press c e or a to start;135;25;162;15; 0.5;0.5; 0;0;0;0
+Reminds me of home;177;69;146;40; 0.5;0.5; 0;0;0;0
+Use your head;1;42;174;67; 0.5;0.5; 0;0;0;0
