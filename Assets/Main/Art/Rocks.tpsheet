@@ -1,0 +1,21 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:a3302ccb2a3b23120e58bb3fdd4c2c73:9367e99820ec9b3f359fa60f8a8a92a4:01da596c5aa461481c0b6beff6fba78c$
+#
+:format=40300
+:texture=Rocks.png
+:size=512x1884
+:pivotpoints=enabled
+:borders=disabled
+
+Arbol Foreground %233;1;1;223;1442; 0.5;0.5; 0;0;0;0
+grass1;226;469;224;195; 0.5;0.5; 0;0;0;0
+grass2;226;666;264;410; 0.5;0.5; 0;0;0;0
+grass3;1;1727;434;156; 0.5;0.5; 0;0;0;0
+rock1;1;1445;342;280; 0.5;0.5; 0;0;0;0
+rock2;226;1078;285;365; 0.5;0.5; 0;0;0;0
+rock3;226;365;186;102; 0.5;0.5; 0;0;0;0
