@@ -82,10 +82,10 @@ TextureImporter:
       name: Credits
       rect:
         serializedVersion: 2
-        x: 1
-        y: 8
-        width: 132
-        height: 32
+        x: 1630
+        y: 1878
+        width: 259
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -93,7 +93,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8abda72cc7abc7e43b9358ea0e4c7f98
+      spriteID: 04eeb230d5697e847b3f70a2be905b52
       vertices: []
       indices: 
       edges: []
@@ -103,9 +103,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 111
-        width: 540
-        height: 400
+        y: 525
+        width: 1080
+        height: 800
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -113,7 +113,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd4cfba909f520c499671a67b25a088c
+      spriteID: 6a1ceac5bac32274fb28de6b6a782f2c
       vertices: []
       indices: 
       edges: []
@@ -122,10 +122,10 @@ TextureImporter:
       name: poster bg
       rect:
         serializedVersion: 2
-        x: 543
-        y: 151
-        width: 640
-        height: 360
+        x: 1
+        y: 1327
+        width: 1280
+        height: 720
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,7 +133,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1811a2cbad4ca0c489b63de55af4c6b9
+      spriteID: ba61d62df471eac44b892a39095e919a
       vertices: []
       indices: 
       edges: []
@@ -142,10 +142,10 @@ TextureImporter:
       name: Press c e or a to start
       rect:
         serializedVersion: 2
-        x: 135
-        y: 25
-        width: 162
-        height: 15
+        x: 1630
+        y: 2020
+        width: 322
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,7 +153,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c5b427b632cc5e54ba7556ce89263911
+      spriteID: f0c7160f01307a54099b97d8ca39303c
       vertices: []
       indices: 
       edges: []
@@ -162,10 +162,10 @@ TextureImporter:
       name: Reminds me of home
       rect:
         serializedVersion: 2
-        x: 177
-        y: 69
-        width: 146
-        height: 40
+        x: 1630
+        y: 1941
+        width: 288
+        height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,7 +173,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3e818b9fa1ab3d941a5058779f6fe3ff
+      spriteID: 0b520917afb1830448c27840f482294f
       vertices: []
       indices: 
       edges: []
@@ -182,10 +182,10 @@ TextureImporter:
       name: Use your head
       rect:
         serializedVersion: 2
-        x: 1
-        y: 42
-        width: 174
-        height: 67
+        x: 1283
+        y: 1917
+        width: 345
+        height: 130
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,7 +193,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dcad97b8926189c48bab9d14687e104e
+      spriteID: 6242fade06ce241479d8bf2ef07af8f4
       vertices: []
       indices: 
       edges: []
