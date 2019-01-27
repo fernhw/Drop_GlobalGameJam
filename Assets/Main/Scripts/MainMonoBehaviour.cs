@@ -289,6 +289,10 @@ public class MainMonoBehaviour : MonoBehaviour
             while (distCharCircle < obsRadiusHalf - 0.3f) {
                 charX += Mathf.Cos(angleCharCircle)*.01f;
                 charZ += Mathf.Sin(angleCharCircle)*.01f;
+                xDif = charX - obsX;
+                zDif = charZ - obsZ;
+                angleCharCircle = Mathf.Atan2(zDif, xDif);
+                distCharCircle = Mathf.Sqrt(xDif*xDif + zDif*zDif);
             }
         }
     }
