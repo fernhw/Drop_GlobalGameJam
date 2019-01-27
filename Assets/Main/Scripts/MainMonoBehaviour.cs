@@ -4,12 +4,11 @@ using UnityEngine;
 using ProInputSystem;
 using System;
 
-public class MainMonoBehaviour : MonoBehaviour
-{
+public class MainMonoBehaviour:MonoBehaviour {
     const float HALF_PI = (Mathf.PI*0.5f);
     const float PI_X2 = (Mathf.PI*2);
     const float PI_45D = PI_X2/8;
-    static readonly Vector3 zero = new Vector3(0,0,0);
+    static readonly Vector3 zero = new Vector3(0, 0, 0);
 
     [SerializeField]
     float FLAME_SPEED = .1f;
@@ -22,6 +21,8 @@ public class MainMonoBehaviour : MonoBehaviour
     float JOYSTICK_RUN = .6f;
     [SerializeField]
     float CAM_SHAKE_TIME = .2f;
+    [SerializeField]
+    float CAM_SHAKE_TIME_DEATH = 1f;
     [SerializeField]
     float CAM_SHAKE_RECOVER = .2f;
     [SerializeField]
@@ -42,8 +43,46 @@ public class MainMonoBehaviour : MonoBehaviour
     [SerializeField]
     float CAM_LIMIT_X_POS = 51;
     [SerializeField]
-    Vector3 CHAR_SIZE = new Vector3(10,10,10);
-   
+    Vector3 CHAR_SIZE = new Vector3(10, 10, 10);
+    [SerializeField]
+    float LIGHT_TIME_SECONDS = 5;
+    [SerializeField]
+    float LIGHT_ALPHA_LIMIT = .5f;
+    [SerializeField]
+    float LIGHT_BONUS_TIME = .5f;
+    [SerializeField]
+    float LIGHT_LIMIT_LIFESPAN = 10f;
+    [SerializeField]
+    float LIGHT_SHINE_DOWN = 1f;
+    [SerializeField]
+    float CAM_SHAKE_PAUSE = 10f;
+
+    [SerializeField]
+    float FLAME_SHOWS_UP_ALPHA = .5f;
+
+    // ONE OF ... EACH FRAME
+    [SerializeField]
+    float FLAME_POSSIBILITY_Z1 = 60;
+    [SerializeField]
+    float FLAME_POSSIBILITY_Z2 = 60;
+    [SerializeField]
+    float FLAME_POSSIBILITY_Z3 = 60;
+    [SerializeField]
+    float FLAME_POSSIBILITY_Z4 = 60;
+
+    [SerializeField]
+    int LEVEL_ONE_QUOTA = 10;
+    [SerializeField]
+    float LEVEL_TWO_QUOTA = 20;
+    [SerializeField]
+    float LEVEL_THREE_QUOTA = 30;
+    [SerializeField]
+    float LEVEL_FOUR_QUOTA = 40;
+    [SerializeField]
+    float WIN_QUOTA = 50;
+
+    [SerializeField]
+    int killCount = 0;
 
     [SerializeField]
     GameObject character;
@@ -52,19 +91,26 @@ public class MainMonoBehaviour : MonoBehaviour
     [SerializeField]
     GameObject mainCamContainer;
     [SerializeField]
+    GameObject particlesHappy;
+    [SerializeField]
     AnimationManager dropAnimationManager;
 
     [SerializeField]
     float deltaModifier = 1;
     [SerializeField]
-    float difficulty = 1;
+    int difficulty = 1;
+
 
     Vector3 ogCamCharComparison = new Vector3();
     List<Obstacle> obstacles;
-    List<Parent> parents;
+    List<Parent> flames;
+
+    CharacterState oldCharacterState = CharacterState.IDLE;
     CharacterState charState = CharacterState.IDLE;
     float preCharX, preCharZ;
     float deltaRun;
+    float deltaTimer;
+
     float
         charX,
         charY,
@@ -72,18 +118,22 @@ public class MainMonoBehaviour : MonoBehaviour
         camX,
         camY,
         camZ;
+
     float shakeScreenTime = 0;
 
     bool hitActionButton;
     bool ifHitPending = false;
 
-    void Start(){
+    void Start() {
         ProInput.Init();
 
         //Obj load
         obstacles = AllOfClass.PickAllOf<Obstacle>();
-        parents = AllOfClass.PickAllOf<Parent>();
+        flames = AllOfClass.PickAllOf<Parent>();
 
+        //setups
+        SetupFlames();
+        particlesHappy.SetActive(false);
         //Camera setup
         ogCamCharComparison =  character.transform.localPosition - mainCamContainer.transform.localPosition;
 
@@ -91,15 +141,15 @@ public class MainMonoBehaviour : MonoBehaviour
         charState = CharacterState.IDLE; // CHANGE FOR OP
         ManageAnimations();
     }
-   
+
     void Update() {
         float deltaBase = Time.deltaTime;
         deltaRun = deltaBase * deltaModifier;
+        deltaTimer = deltaBase;
         ProInput.UpdateInput(deltaRun, debug: true);
 
         Vector3 charPosition = character.transform.localPosition;
         Vector3 camPosition = mainCamContainer.transform.localPosition;
-
 
         AnalogueInput stick = ProInput.GlobalActionStick;
 
@@ -139,7 +189,7 @@ public class MainMonoBehaviour : MonoBehaviour
         if (!stick.IsActive() && !hitActionButton) {
             charState = CharacterState.IDLE;
         }
-        
+
         Flames();
         DealWithCollisions();
         ManageCamera();
@@ -151,62 +201,176 @@ public class MainMonoBehaviour : MonoBehaviour
         mainCamContainer.transform.localPosition = newcamPos;
     }
 
-    CharacterState oldCharacterState = CharacterState.IDLE  ;
+    
     private void ManageAnimations() {
-        if (charState != oldCharacterState) {  
+        if (charState != oldCharacterState) {
             oldCharacterState = charState;
             int animId = (int)charState;
             dropAnimationManager.JumpTo(Drop.anims[animId]);
         }
     }
 
+    
     private void Flames() {
         bool anyHitsCollisionOrButton = false;
-        int parentNum = parents.Count;
+        bool happy = false;
+        int parentNum = flames.Count;
         for (int i = 0; i<parentNum; i++) {
-            Parent parent = parents[i];
+            Parent flameObj = flames[i];
+            Transform obsTrans = flameObj.transform;
+            Vector3 obsPos = flameObj.flamePivot.transform.localPosition;
+            Vector3 obsScale = obsTrans.localScale;
+            float obsX = obsPos.x;
+            float obsZ = obsPos.z;
+            float obsWidthHalf = obsScale.x*.5f + CHAR_SIZE.x*.5f;
+            float obsDepthHalf = obsScale.z*.5f + CHAR_SIZE.z*.5f;
 
-            if (parent.active) {
-                parent.flame.percentage += deltaRun* FLAME_SPEED*difficulty;
-                Transform obsTrans = parent.transform;
-                Vector3 obsPos = parent.flamePivot.transform.localPosition;
-                Vector3 obsScale = obsTrans.localScale;
-                float obsX = obsPos.x;
-                float obsZ = obsPos.z;
-                float obsWidthHalf = obsScale.x*.5f + CHAR_SIZE.x*.5f;
-                float obsDepthHalf = obsScale.z*.5f + CHAR_SIZE.z*.5f;
-                if (charX > obsX - obsWidthHalf &&
-                    charX < obsX + obsWidthHalf &&
-                    charZ > obsZ - obsDepthHalf &&
-                    charZ < obsZ + obsDepthHalf) {
-                    anyHitsCollisionOrButton = true;
-                    if (hitActionButton) {
-                        if (ifHitPending) {
-                            ifHitPending = false;
-                            print("HIT PARENT");
-                            ShakeCam();
-                            parent.flame.percentage -= FLAME_HIT;
-                            parent.flame.actualFlame += FLAME_EFFECT_HIT;
-                            if (parent.flame.percentage>1) {
-                                parent.flame.percentage = 1;
-                            }
-                            
+            bool inFlameZone = (charX > obsX - obsWidthHalf &&
+                charX < obsX + obsWidthHalf &&
+                charZ > obsZ - obsDepthHalf &&
+                charZ < obsZ + obsDepthHalf);
+
+            switch (flameObj.state) {
+                case FlameState.OFF:
+                    flameObj.timer = 0;
+                    flameObj.lifeSpanTimer = 0;
+                    float possibilities = FLAME_POSSIBILITY_Z1;
+                    switch (difficulty) {
+                        case 1:
+                            possibilities = FLAME_POSSIBILITY_Z1;
+                            break;
+                        case 2:
+                            possibilities = FLAME_POSSIBILITY_Z2;
+                            break;
+                        case 3:
+                            possibilities = FLAME_POSSIBILITY_Z3;
+                            break;
+                        case 4:
+                            possibilities = FLAME_POSSIBILITY_Z4;
+                            break;
+                    }
+                    if (Mathf.RoundToInt(UnityEngine.Random.value*possibilities) == 0) {
+                        flameObj.Activate();
+                    }
+                    break;
+                    //light active states
+                case FlameState.LIGHT_DOWN:
+                case FlameState.FIRE_ON:
+                    flameObj.lifeSpanTimer += deltaTimer;
+                    if (flameObj.lifeSpanTimer > LIGHT_LIMIT_LIFESPAN-LIGHT_SHINE_DOWN) {
+                        float perc = (1-(flameObj.lifeSpanTimer-(LIGHT_LIMIT_LIFESPAN-LIGHT_SHINE_DOWN))/LIGHT_SHINE_DOWN)*LIGHT_ALPHA_LIMIT;
+                        flameObj.shine.color = new Vector4(perc, perc, perc, 1);
+                    }
+                    if (flameObj.lifeSpanTimer > LIGHT_LIMIT_LIFESPAN) {
+                        if (flameObj.state != FlameState.FIRE_ON) {
+                            flameObj.ResetFlame();
+                            flameObj.state = FlameState.OFF;
                         }
                     }
-                }
-                if (parent.flame.percentage<0) {
-                    parent.active = false;
-                }
+                    break;
+                case FlameState.CUTSCENE_ACTIVE:
+                    break;
+                case FlameState.OH_NO:
+                    break;
             }
-            parent.flame.ShowFlames(deltaRun);
+            switch (flameObj.state) {
+                case FlameState.LIGHT_DOWN:
+                    flameObj.timer += deltaTimer;
+                    if (inFlameZone && flameObj.timer > LIGHT_TIME_SECONDS - LIGHT_BONUS_TIME) {
+                        flameObj.timer = LIGHT_TIME_SECONDS - LIGHT_BONUS_TIME;
+                    }
+                    if (flameObj.timer > LIGHT_TIME_SECONDS) {
+                        flameObj.state = FlameState.FIRE_ON;                        
+                        flameObj.flame.actualFlame = FLAME_SHOWS_UP_ALPHA;
+                        ShakeCam(CAM_SHAKE_TIME,true);
+                    }
+                    float shinePerc = flameObj.timer;
+                    if (shinePerc > LIGHT_ALPHA_LIMIT) {
+                        shinePerc = LIGHT_ALPHA_LIMIT;
+                    }
+                    if (flameObj.lifeSpanTimer <= LIGHT_LIMIT_LIFESPAN-LIGHT_SHINE_DOWN) {
+                        flameObj.shine.color = new Vector4(shinePerc, shinePerc, shinePerc, 1);
+                    }
+                    if (inFlameZone) {
+                        happy = true;
+                    }
+                    break;
+                case FlameState.FIRE_ON:
+                    flameObj.flame.percentage += deltaTimer* FLAME_SPEED;
+                    if (inFlameZone) {
+                        anyHitsCollisionOrButton = true;
+                        if (hitActionButton) {
+                            if (ifHitPending) {
+                                ifHitPending = false;
+                                ShakeCam(CAM_SHAKE_TIME);
+                                flameObj.flame.percentage -= FLAME_HIT;
+                                flameObj.flame.actualFlame += FLAME_EFFECT_HIT;                                
+                                if (flameObj.flame.percentage<0) {
+                                    flameObj.state = FlameState.LIGHT_DOWN;
+                                    flameObj.timer = LIGHT_TIME_SECONDS - LIGHT_BONUS_TIME;
+                                    KilledOne();
+                                }
+                            }
+                        }
+                    }
+                    if (flameObj.flame.percentage>1) {
+                        flameObj.flame.percentage = 1;
+                        flameObj.state = FlameState.OH_NO;
+                        print("DEAD");
+                        flameObj.flame.actualFlame = 100;
+                        ShakeCam(CAM_SHAKE_TIME_DEATH);
+                    }
+                    if (flameObj.flame.percentage<0) {
+                        flameObj.active = false;
+                    }
+                    break;
+                case FlameState.OH_NO:
+                    break;
+                case FlameState.CUTSCENE_ACTIVE:
+                    break;
+            }
+            flameObj.flame.ShowFlames(deltaTimer);
         }
-       
+
         if (hitActionButton) {
             anyHitsCollisionOrButton = true;
             ifHitPending = false;
         }
         if (!hitActionButton) {
             ifHitPending = true;
+        }
+        if (happy) {
+            particlesHappy.SetActive(true);
+        } else {
+            particlesHappy.SetActive(false);
+        }
+    }
+    
+    private void KilledOne() {
+        killCount++;
+        if (difficulty == 1 && killCount>LEVEL_ONE_QUOTA) {
+            difficulty++;
+        }
+        if (difficulty == 2 && killCount>LEVEL_TWO_QUOTA) {
+            difficulty++;
+        }
+        if (difficulty == 3 && killCount>LEVEL_THREE_QUOTA) {
+            difficulty++;
+        }
+        if (difficulty == 4 && killCount>LEVEL_FOUR_QUOTA) {
+            difficulty++;
+        }
+        if (difficulty == 5 && killCount>WIN_QUOTA) {
+            print("WIN GAME asdfghjkgfahaehj");
+        }
+
+    }
+
+    private void SetupFlames() {
+        int parentNum = flames.Count;
+        for (int i = 0; i<parentNum; i++) {
+            Parent parent = flames[i];
+            parent.ResetFlame();
         }
     }
 
@@ -242,19 +406,26 @@ public class MainMonoBehaviour : MonoBehaviour
                         camInternalCam.y = CAM_SHAKE_POWER;
                     }
                 } else {
-                    shakeScreenTime += deltaRun;
+                    shakeScreenTime += deltaTimer;
                 }
             }
             mainCam.transform.localPosition = new Vector3(camInternalCam.x, camInternalCam.y, camInternalCam.z);
-            shakeScreenTime -= CAM_SHAKE_RECOVER;            
+            shakeScreenTime -= CAM_SHAKE_RECOVER;
+            if (cameShakeWithPause) {
+                deltaModifier = .4f;
+            }
         } else {
+            deltaModifier = 1;
             mainCam.transform.localPosition = zero;
         }
 
     }
 
-    public void ShakeCam() {
-        shakeScreenTime = CAM_SHAKE_TIME;
+    bool cameShakeWithPause = false;
+
+    public void ShakeCam(float shake, bool pause = false) {
+        shakeScreenTime = shake;
+        cameShakeWithPause = pause;
     }
 
     private void DealWithCollisions() {

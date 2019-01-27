@@ -1397,7 +1397,7 @@ GameObject:
   - component: {fileID: 3771080993121276672}
   - component: {fileID: 3771080993121276673}
   m_Layer: 0
-  m_Name: FlameContainer
+  m_Name: animations_fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1465,6 +1465,8 @@ MonoBehaviour:
   - {fileID: 3771080993243934410}
   - {fileID: 3771080991808368725}
   percentage: 0
+  glow: {fileID: 0}
+  actualFlame: 0
 --- !u!1 &3771080993243934410
 GameObject:
   m_ObjectHideFlags: 0

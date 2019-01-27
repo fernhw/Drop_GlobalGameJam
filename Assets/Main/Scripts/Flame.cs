@@ -12,7 +12,7 @@ public class Flame : MonoBehaviour
 
     public float percentage = 0;
     public SpriteRenderer glow;
-
+   
     public float actualFlame = 0;
 
     public void ShowFlames(float delta) {

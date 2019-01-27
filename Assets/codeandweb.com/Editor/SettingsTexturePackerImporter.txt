@@ -3,34 +3,13 @@ importPivots: 1
 tpsheetFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
 - Assets/Main/animationSheets/Walk Animation Sprite.tpsheet
-<<<<<<< HEAD
-- Assets/Main/Art/arboles.tpsheet
-- Assets/Main/Art/Arbustos Sprite Sheet.tpsheet
 - Assets/Main/Art/gradients.tpsheet
-- Assets/Main/Art/Rocks.tpsheet
-=======
-- Assets/Main/Art/gradients.tpsheet
->>>>>>> ec0e6838cc2e18419316ef0514e99bb0b6e2a6d7
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Main/animationSheets/Walk Animation Sprite.png
-<<<<<<< HEAD
-- Assets/Main/Art/arboles.png
-- Assets/Main/Art/Arbustos Sprite Sheet.png
 - Assets/Main/Art/gradients.png
-- Assets/Main/Art/Rocks.png
-=======
-- Assets/Main/Art/gradients.png
->>>>>>> ec0e6838cc2e18419316ef0514e99bb0b6e2a6d7
 normalmapFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
 - 
 - 
-<<<<<<< HEAD
-- 
-- 
-- 
-- 
-=======
->>>>>>> ec0e6838cc2e18419316ef0514e99bb0b6e2a6d7
 enableDebugOutput: 0
