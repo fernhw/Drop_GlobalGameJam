@@ -1,15 +1,13 @@
 fileFormatVersion: 2
-guid: d620437c00317d2429d2b10f067f98c8
+guid: 1723f936eb9ecca4288d803ef2db7c58
 TextureImporter:
   fileIDToRecycleName:
-    21300000: grass1
-    21300002: grass2
-    21300004: grass3
-    21300006: rock1
-    21300008: rock2
-    21300010: rock3
-    21300012: 'Arbol Foreground #3'
-    21300014: puddle
+    21300000: Credits
+    21300002: poster bg
+    21300004: Press c e or a to start
+    21300006: Reminds me of home
+    21300008: Use your head
+    21300010: dropped dead
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -81,13 +79,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 'Arbol Foreground #3'
+      name: Credits
       rect:
         serializedVersion: 2
         x: 1
-        y: 3
-        width: 223
-        height: 1442
+        y: 8
+        width: 132
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -95,79 +93,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81072041181971d4992ff8e96884216f
+      spriteID: 8abda72cc7abc7e43b9358ea0e4c7f98
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: grass1
-      rect:
-        serializedVersion: 2
-        x: 779
-        y: 968
-        width: 224
-        height: 195
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 08a9604c3c7788b4694039ab63e5df35
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: grass2
-      rect:
-        serializedVersion: 2
-        x: 513
-        y: 753
-        width: 264
-        height: 410
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63680b2a0dc13be428c94a8f60a548f0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: grass3
-      rect:
-        serializedVersion: 2
-        x: 226
-        y: 1289
-        width: 434
-        height: 156
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5fe20b168970d2540baa46b9f08f77fd
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: puddle
+      name: dropped dead
       rect:
         serializedVersion: 2
         x: 1
-        y: 1447
-        width: 1011
-        height: 444
+        y: 111
+        width: 540
+        height: 400
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,19 +113,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 98e32ca9d94c6154f94e54967c9b355c
+      spriteID: fd4cfba909f520c499671a67b25a088c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock1
+      name: poster bg
       rect:
         serializedVersion: 2
-        x: 662
-        y: 1165
-        width: 342
-        height: 280
+        x: 543
+        y: 151
+        width: 640
+        height: 360
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,19 +133,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a589383f33743ab40bb95789d8561a22
+      spriteID: 1811a2cbad4ca0c489b63de55af4c6b9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock2
+      name: Press c e or a to start
       rect:
         serializedVersion: 2
-        x: 226
-        y: 922
-        width: 285
-        height: 365
+        x: 135
+        y: 25
+        width: 162
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,19 +153,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e273be82e019a5d42a247e8daebd62fd
+      spriteID: c5b427b632cc5e54ba7556ce89263911
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rock3
+      name: Reminds me of home
       rect:
         serializedVersion: 2
-        x: 779
-        y: 864
-        width: 186
-        height: 102
+        x: 177
+        y: 69
+        width: 146
+        height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,7 +173,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 227b80dbff9bdbc4fb782115a7dd97d9
+      spriteID: 3e818b9fa1ab3d941a5058779f6fe3ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Use your head
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 42
+        width: 174
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcad97b8926189c48bab9d14687e104e
       vertices: []
       indices: 
       edges: []
@@ -243,7 +201,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a1f859d60ac92b241bd91b26f5a4c0b3
+    spriteID: 7537d44c6eff70d41b5a022e535e87c0
     vertices: []
     indices: 
     edges: []
