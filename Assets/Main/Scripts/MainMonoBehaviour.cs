@@ -82,7 +82,9 @@ public class MainMonoBehaviour : MonoBehaviour
         preCharX = charX;
         preCharZ = charZ;
 
-        if (stick.IsActive()) {
+        hitActionButton = ProInput.A;
+
+        if (stick.IsActive() && !hitActionButton) {
             float stickAngle = stick.Angle;
             float stickCos = Mathf.Cos(stickAngle);
             float stickSin = Mathf.Sin(stickAngle);
@@ -97,6 +99,10 @@ public class MainMonoBehaviour : MonoBehaviour
             }
         }
 
+        if (hitActionButton) {
+
+        }
+
         Parents();
         Collisions();
         ManageCamera();
@@ -106,16 +112,15 @@ public class MainMonoBehaviour : MonoBehaviour
         Vector3 newcamPos = new Vector3(camX, camY, camZ);
         camera.transform.localPosition = newcamPos;
     }
-
+    bool hitActionButton;
     bool ifHitPending = false;
     private void Parents() {
         bool anyHitsCollisionOrButton = false;
-        int parentNum = parents.Count;
-        bool hitActionButton = ProInput.A;       
+        int parentNum = parents.Count;    
         for (int i = 0; i<parentNum; i++) {
             Parent parent = parents[i];
             Transform obsTrans = parent.transform;
-            Vector3 obsPos = obsTrans.localPosition;
+            Vector3 obsPos = parent.flamePivot.transform.localPosition;
             Vector3 obsScale = obsTrans.localScale;
             float obsX = obsPos.x;
             float obsZ = obsPos.z;

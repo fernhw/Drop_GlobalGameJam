@@ -5,7 +5,7 @@ using UnityEngine;
 public class Parent : MonoBehaviour
 {
     public ParentState state = ParentState.SMALL;
-
+    public GameObject flamePivot;
     public bool active = false;
 
     private void Start() {
@@ -14,7 +14,7 @@ public class Parent : MonoBehaviour
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.localPosition, transform.localScale);
+        Gizmos.DrawWireCube(flamePivot.transform.localPosition, transform.localScale);
     }
 }
 
