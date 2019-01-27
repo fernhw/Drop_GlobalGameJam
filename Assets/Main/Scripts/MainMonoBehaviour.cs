@@ -11,6 +11,8 @@ public class MainMonoBehaviour:MonoBehaviour {
     const float PI_45D = PI_X2/8;
     static readonly Vector3 zero = new Vector3(0, 0, 0);
 
+    public AudioSource song;
+
     [SerializeField]
     float FLAME_SPEED = .1f;
     [SerializeField]
@@ -116,6 +118,7 @@ public class MainMonoBehaviour:MonoBehaviour {
     float preCharX, preCharZ;
     float deltaRun;
     float deltaTimer;
+    bool gameStart = false;
 
     float
         charX,
@@ -126,7 +129,7 @@ public class MainMonoBehaviour:MonoBehaviour {
         camZ;
 
     float shakeScreenTime = 0;
-
+    bool controlBlock = true;
     bool hitActionButton;
     bool ifHitPending = false;
 
@@ -139,6 +142,9 @@ public class MainMonoBehaviour:MonoBehaviour {
 
         //setups
         SetupFlames();
+        flames[0].Activate();
+        gameStart = false;
+
         particlesHappy.SetActive(false);
         //Camera setup
         ogCamCharComparison =  character.transform.localPosition - mainCamContainer.transform.localPosition;
@@ -147,6 +153,18 @@ public class MainMonoBehaviour:MonoBehaviour {
         //init
         charState = CharacterState.IDLE; // CHANGE FOR OP
         ManageAnimations();
+        StartCoroutine("GameInit");
+    }
+
+    IEnumerator GameInit() {
+        yield return new WaitForSeconds(4);
+        song.Play();
+        controlBlock = false;
+    }
+
+    IEnumerator GameEnd() {
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene("intro");
     }
 
     void Update() {
@@ -157,8 +175,6 @@ public class MainMonoBehaviour:MonoBehaviour {
 
         Vector3 charPosition = character.transform.localPosition;
         Vector3 camPosition = mainCamContainer.transform.localPosition;
-
-        AnalogueInput stick = ProInput.GlobalActionStick;
 
         charX = charPosition.x;
         charY = charPosition.y;
@@ -173,9 +189,28 @@ public class MainMonoBehaviour:MonoBehaviour {
 
         hitActionButton = ProInput.A;
 
+        HandleControls();
+
+        Flames();
+        DealWithCollisions();
+        ManageCamera();
+        ManageAnimations();
+
+        Vector3 newPos = new Vector3(charX, charY, charZ);
+        character.transform.localPosition = newPos;
+        Vector3 newcamPos = new Vector3(camX, camY, camZ);
+        mainCamContainer.transform.localPosition = newcamPos;
+    }
+
+    private void HandleControls() {
+        if (controlBlock)
+            return;
+
         if (hitActionButton) {
             charState = CharacterState.HEAD_BONK;
         }
+
+        AnalogueInput stick = ProInput.GlobalActionStick;
 
         if (stick.IsActive() && !hitActionButton) {
             float stickAngle = stick.Angle;
@@ -196,19 +231,8 @@ public class MainMonoBehaviour:MonoBehaviour {
         if (!stick.IsActive() && !hitActionButton) {
             charState = CharacterState.IDLE;
         }
-
-        Flames();
-        DealWithCollisions();
-        ManageCamera();
-        ManageAnimations();
-
-        Vector3 newPos = new Vector3(charX, charY, charZ);
-        character.transform.localPosition = newPos;
-        Vector3 newcamPos = new Vector3(camX, camY, camZ);
-        mainCamContainer.transform.localPosition = newcamPos;
     }
 
-    
     private void ManageAnimations() {
         if (charState != oldCharacterState) {
             oldCharacterState = charState;
@@ -262,22 +286,28 @@ public class MainMonoBehaviour:MonoBehaviour {
                             possibilities = 999999999999999;
                             break;
                     }
-                    if (Mathf.RoundToInt(UnityEngine.Random.value*possibilities) == 0) {
-                        flameObj.Activate();
+                    if (gameStart) {
+                        if (Mathf.RoundToInt(UnityEngine.Random.value*possibilities) == 0) {
+                            flameObj.Activate();
+                        }
                     }
                     break;
                     //light active states
                 case FlameState.LIGHT_DOWN:
                 case FlameState.FIRE_ON:
-                    flameObj.lifeSpanTimer += deltaTimer;
-                    if (flameObj.lifeSpanTimer > LIGHT_LIMIT_LIFESPAN-LIGHT_SHINE_DOWN) {
-                        float perc = (1-(flameObj.lifeSpanTimer-(LIGHT_LIMIT_LIFESPAN-LIGHT_SHINE_DOWN))/LIGHT_SHINE_DOWN)*LIGHT_ALPHA_LIMIT;
-                        flameObj.shine.color = new Vector4(perc, perc, perc, 1);
-                    }
-                    if (flameObj.lifeSpanTimer > LIGHT_LIMIT_LIFESPAN) {
-                        if (flameObj.state != FlameState.FIRE_ON) {
-                            flameObj.ResetFlame();
-                            flameObj.state = FlameState.OFF;
+                    if (gameStart) {
+                        flameObj.lifeSpanTimer += deltaTimer;
+                        if (flameObj.lifeSpanTimer > LIGHT_LIMIT_LIFESPAN-LIGHT_SHINE_DOWN) {
+                            float perc = (1-(flameObj.lifeSpanTimer-(LIGHT_LIMIT_LIFESPAN-LIGHT_SHINE_DOWN))/LIGHT_SHINE_DOWN)*LIGHT_ALPHA_LIMIT;
+                            flameObj.shine.color = new Vector4(perc, perc, perc, 1);
+                        }
+                   
+
+                        if (flameObj.lifeSpanTimer > LIGHT_LIMIT_LIFESPAN) {
+                            if (flameObj.state != FlameState.FIRE_ON) {
+                                flameObj.ResetFlame();
+                                flameObj.state = FlameState.OFF;
+                            }
                         }
                     }
                     break;
@@ -297,6 +327,7 @@ public class MainMonoBehaviour:MonoBehaviour {
                         if (difficulty == 5 && killCount>WIN_QUOTA) {
                         } else {
                             flameObj.state = FlameState.FIRE_ON;
+                            gameStart = true;
                             flameObj.flame.actualFlame = FLAME_SHOWS_UP_ALPHA;
                             ShakeCam(CAM_SHAKE_TIME, true);
                         }
@@ -314,6 +345,7 @@ public class MainMonoBehaviour:MonoBehaviour {
                     }
                     break;
                 case FlameState.FIRE_ON:
+                    
                     flameObj.flame.percentage += deltaTimer* FLAME_SPEED;
                     if (inFlameZone) {
                         anyHitsCollisionOrButton = true;
@@ -384,9 +416,11 @@ public class MainMonoBehaviour:MonoBehaviour {
             difficulty++;
         }
         if (difficulty == 5 && killCount>WIN_QUOTA) {
+            if (winReminder.activeInHierarchy == false) {
+                StartCoroutine("GameEnd");
+            }
             homeReminder.SetActive(false);
-            winReminder.SetActive(true);
-
+            winReminder.SetActive(true);            
         }
         if (levelSwap) {
             homeReminder.SetActive(true);
