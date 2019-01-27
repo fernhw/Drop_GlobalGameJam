@@ -1,21 +1,26 @@
 fileFormatVersion: 2
-guid: 25e395a3d0612834caf595b628103464
+guid: b78e1634bc6342540a6c766cb540caba
 TextureImporter:
   fileIDToRecycleName:
-    21300000: 'Arbusto Fondo #1'
-    21300002: 'Arbusto Fondo #2'
-    21300004: 'Arbusto Fondo #3'
-    21300006: 'Arbusto Fondo #4'
-    21300008: 'Arbusto Fondo #5'
-    21300010: 'Arbusto Front #1'
-    21300012: 'Arbusto Front #2'
-    21300014: 'Arbusto Front #3'
-    21300016: 'Arbusto Front #4'
-    21300018: 'Arbusto Front #5'
-    21300020: 'Arbusto Front #6'
-    21300022: 'Arbusto Front #7'
-    21300024: 'Arbusto Front #8'
-    21300026: Foreground Bushes
+    21300000: 1
+    21300002: 2
+    21300004: 3
+    21300006: 4
+    21300008: 5
+    21300010: 11
+    21300012: 22
+    21300014: 33
+    21300016: a
+    21300018: b
+    21300020: c
+    21300022: d
+    21300024: e
+    21300026: f
+    21300028: g
+    21300030: j
+    21300032: k
+    21300034: l
+    21300036: m
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -56,7 +61,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -87,281 +92,381 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 'Arbusto Fondo #1'
+      name: 1
       rect:
         serializedVersion: 2
-        x: 357
-        y: 1329
-        width: 494
-        height: 343
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 687
+        y: 804
+        width: 158
+        height: 400
+      alignment: 9
+      pivot: {x: 0.4620253, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 472a96985bcdae04b9494283b4b7463d
+      spriteID: a4d802ae12590ef4eba069338073a1c8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Fondo #2'
+      name: 2
       rect:
         serializedVersion: 2
-        x: 4
-        y: 1250
-        width: 351
-        height: 422
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 856
+        y: 1014
+        width: 165
+        height: 400
+      alignment: 9
+      pivot: {x: 0.4848485, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d6b72525cb7517941929dde0d9a33d0d
+      spriteID: 3fd1022466212594ca106d167b672dec
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Fondo #3'
+      name: 3
       rect:
         serializedVersion: 2
-        x: 4
-        y: 139
-        width: 303
-        height: 334
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 1162
+        width: 346
+        height: 229
+      alignment: 9
+      pivot: {x: 0.27745664, y: 0.8733624}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4fbe40124234b7e45b0597b34238259d
+      spriteID: 9d9247678d76b4246a40df15f5b16a48
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Fondo #4'
+      name: 4
       rect:
         serializedVersion: 2
-        x: 4
-        y: 475
-        width: 316
-        height: 366
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 214
+        width: 158
+        height: 400
+      alignment: 9
+      pivot: {x: 0.4620253, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f55ab72d21b01f45baa6ab344e57f6e
+      spriteID: 1fddc535d6dc96f4d970b639ed60f92a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Fondo #5'
+      name: 5
       rect:
         serializedVersion: 2
-        x: 4
-        y: 843
-        width: 291
-        height: 405
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 769
+        width: 249
+        height: 391
+      alignment: 9
+      pivot: {x: 0.64257026, y: 0.51150894}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8bb4e9cbb9cec4d4e9dc3424ae560dc3
+      spriteID: 8120e73b86ad6c34db59ec71ab5f1187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Front #1'
+      name: 11
       rect:
         serializedVersion: 2
-        x: 623
-        y: 806
-        width: 276
-        height: 258
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 214
+        width: 158
+        height: 400
+      alignment: 9
+      pivot: {x: 0.4620253, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4a9086f5c90d6454398b5b66f56fb7ae
+      spriteID: 9f3c446246fe456489abaafd3f0e6ae2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Front #2'
+      name: 22
       rect:
         serializedVersion: 2
-        x: 297
-        y: 904
-        width: 230
-        height: 344
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 161
+        y: 222
+        width: 176
+        height: 392
+      alignment: 9
+      pivot: {x: 0.4943182, y: 0.5102041}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72f6639c5b61acc40843606ad8aea61f
+      spriteID: 17f503d1164f19a4088c19d2c9aef228
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Front #3'
+      name: 33
       rect:
         serializedVersion: 2
-        x: 322
-        y: 641
-        width: 299
-        height: 261
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 847
+        y: 616
+        width: 176
+        height: 396
+      alignment: 9
+      pivot: {x: 0.47727272, y: 0.5050505}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c100b07d238df9645a8329a8c4e0ebd2
+      spriteID: 7b201341138644740a4c10a48403a6fa
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Front #4'
+      name: a
       rect:
         serializedVersion: 2
-        x: 309
-        y: 140
-        width: 370
-        height: 333
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f6414f2f87504ce4396b4c347b68690d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 'Arbusto Front #5'
-      rect:
-        serializedVersion: 2
-        x: 901
-        y: 860
-        width: 366
+        x: 1
+        y: 1838
+        width: 496
         height: 209
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49596775, y: 0.9569378}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd59b053cdb84934ea6142664d6bdc68
+      spriteID: 35d76e8207d0d9442b5629eecac7a508
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Front #6'
+      name: b
       rect:
         serializedVersion: 2
-        x: 828
-        y: 1071
-        width: 276
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 499
+        y: 1838
+        width: 496
+        height: 209
+      alignment: 9
+      pivot: {x: 0.49596775, y: 0.9569378}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acfb018190bab7f498e806a517c5ff11
+      spriteID: 8d3786e40c82a684eac3e4ddc607580d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Front #7'
+      name: c
       rect:
         serializedVersion: 2
-        x: 529
-        y: 1066
-        width: 297
-        height: 261
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1
+        y: 1622
+        width: 476
+        height: 214
+      alignment: 9
+      pivot: {x: 0.5168067, y: 0.93457943}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f4e56eec2982847409552ffdda9f596e
+      spriteID: 42efb9c9fe2b3f84bac3371c53f357b5
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 'Arbusto Front #8'
+      name: d
       rect:
         serializedVersion: 2
-        x: 623
-        y: 593
-        width: 285
-        height: 211
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 479
+        y: 1416
+        width: 449
+        height: 209
+      alignment: 9
+      pivot: {x: 0.54788417, y: 0.9569378}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c904b340bbb7b744a12483872195611
+      spriteID: 5f9ba40e3199a4b419315875734c08b8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Foreground Bushes
+      name: e
       rect:
         serializedVersion: 2
-        x: 4
-        y: 1674
-        width: 1817
-        height: 370
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 479
+        y: 1627
+        width: 450
+        height: 209
+      alignment: 9
+      pivot: {x: 0.54888886, y: 0.9569378}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5086945569db82a41b6a56d1d3c82dbe
+      spriteID: 0a87429d32331f44bb1138a0e10e5409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: f
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1393
+        width: 437
+        height: 227
+      alignment: 9
+      pivot: {x: 0.5354691, y: 0.88105726}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9f22e225ad921746b8fdb0b5f4d8b3f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: g
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 1206
+        width: 414
+        height: 208
+      alignment: 9
+      pivot: {x: 0.50966185, y: 0.96153843}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65ef427fa6abc87488f59ba53d2dbf66
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: j
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 916
+        width: 336
+        height: 288
+      alignment: 9
+      pivot: {x: 0.48214287, y: 0.6944444}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d54cc21f551c36243af593202e8dd150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 214
+        width: 158
+        height: 400
+      alignment: 9
+      pivot: {x: 0.4620253, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9fd549b98392a5499f5385f254109bc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: l
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 222
+        width: 176
+        height: 392
+      alignment: 9
+      pivot: {x: 0.4943182, y: 0.5102041}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940bdaf8a82a4604d88e3f19721d2bbd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: m
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 616
+        width: 176
+        height: 396
+      alignment: 9
+      pivot: {x: 0.47727272, y: 0.5050505}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a75a8e950127a2a4ebfadd6d82fc18d9
       vertices: []
       indices: 
       edges: []
@@ -369,7 +474,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a6d2df1a81ab50b44a1a91edee9df91c
+    spriteID: 449edab7b85bda9458bc1d1e16e938c6
     vertices: []
     indices: 
     edges: []

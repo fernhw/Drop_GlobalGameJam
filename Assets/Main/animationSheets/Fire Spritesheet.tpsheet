@@ -1,0 +1,19 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:1ddb89efe09106b77cd160ddce02d9b8:509c6717e0aa83109b372f2deaff7d00:1f17563afd6669f30bde68b13fd7b799$
+#
+:format=40300
+:texture=Fire Spritesheet.png
+:size=512x1024
+:pivotpoints=enabled
+:borders=disabled
+
+1;270;724;116;295; 0.5;0.5; 0;0;0;0
+2;5;229;148;357; 0.5;0.5; 0;0;0;0
+3;125;644;143;375; 0.5;0.5; 0;0;0;0
+4;155;247;131;395; 0.5;0.5; 0;0;0;0
+5;5;588;118;431; 0.5;0.5; 0;0;0;0
