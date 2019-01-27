@@ -12,6 +12,10 @@ public class MainMonoBehaviour:MonoBehaviour {
     static readonly Vector3 zero = new Vector3(0, 0, 0);
 
     public AudioSource song;
+    [SerializeField]
+    AudioSource pasos;
+    [SerializeField]
+    AudioSource golpe;
 
     [SerializeField]
     float FLAME_SPEED = .1f;
@@ -99,6 +103,10 @@ public class MainMonoBehaviour:MonoBehaviour {
     GameObject homeReminder;
     [SerializeField]
     GameObject winReminder;
+    [SerializeField]
+    Parent firstFlame;
+
+    
 
     [SerializeField]
     AnimationManager dropAnimationManager;
@@ -142,7 +150,7 @@ public class MainMonoBehaviour:MonoBehaviour {
 
         //setups
         SetupFlames();
-        flames[0].Activate();
+        firstFlame.Activate();
         gameStart = false;
 
         particlesHappy.SetActive(false);
@@ -202,12 +210,19 @@ public class MainMonoBehaviour:MonoBehaviour {
         mainCamContainer.transform.localPosition = newcamPos;
     }
 
+    bool actionButtonNotPressed = true;
     private void HandleControls() {
         if (controlBlock)
             return;
 
         if (hitActionButton) {
             charState = CharacterState.HEAD_BONK;
+            if (!actionButtonNotPressed) {
+                actionButtonNotPressed = true;
+                golpe.Play();
+            }
+        } else {
+            actionButtonNotPressed = false;
         }
 
         AnalogueInput stick = ProInput.GlobalActionStick;
@@ -226,6 +241,9 @@ public class MainMonoBehaviour:MonoBehaviour {
                 charZ -= stickSin * CHAR_SPEED * deltaRun;
             }
             charState = CharacterState.WALK;
+            pasos.volume = .5f;
+        } else {
+            pasos.volume = 0;
         }
 
         if (!stick.IsActive() && !hitActionButton) {
@@ -327,9 +345,11 @@ public class MainMonoBehaviour:MonoBehaviour {
                         if (difficulty == 5 && killCount>WIN_QUOTA) {
                         } else {
                             flameObj.state = FlameState.FIRE_ON;
-                            gameStart = true;
+                            
                             flameObj.flame.actualFlame = FLAME_SHOWS_UP_ALPHA;
                             ShakeCam(CAM_SHAKE_TIME, true);
+
+                            gameStart = true;
                         }
                        
                     }
