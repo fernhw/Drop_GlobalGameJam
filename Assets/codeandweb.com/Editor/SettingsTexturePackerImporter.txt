@@ -5,29 +5,40 @@ tpsheetFileNames:
 - Assets/Main/animationSheets/Fire Spritesheet.tpsheet
 - Assets/Main/animationSheets/HealthBar Sprite.tpsheet
 - Assets/Main/animationSheets/Walk Animation Sprite.tpsheet
+<<<<<<< HEAD
+- Assets/Main/Art/gradients.tpsheet
+=======
 - Assets/Main/Art/arboles.tpsheet
 - Assets/Main/Art/Arbustos Sprite Sheet.tpsheet
 - Assets/Main/Art/gradients.tpsheet
 - Assets/Main/Art/Rocks.tpsheet
 - Assets/Main/Art/UI.tpsheet
+>>>>>>> 809e7544d5b6572b17f2a871472cd53071aed7a4
 textureFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites.png
 - Assets/Main/animationSheets/Fire Spritesheet.png
 - Assets/Main/animationSheets/HealthBar Sprite.png
 - Assets/Main/animationSheets/Walk Animation Sprite.png
+<<<<<<< HEAD
+- Assets/Main/Art/gradients.png
+=======
 - Assets/Main/Art/arboles.png
 - Assets/Main/Art/Arbustos Sprite Sheet.png
 - Assets/Main/Art/gradients.png
 - Assets/Main/Art/Rocks.png
 - Assets/Main/Art/UI.png
+>>>>>>> 809e7544d5b6572b17f2a871472cd53071aed7a4
 normalmapFileNames:
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
 - 
 - 
+<<<<<<< HEAD
+=======
 - 
 - 
 - 
 - 
 - 
 - 
+>>>>>>> 809e7544d5b6572b17f2a871472cd53071aed7a4
 enableDebugOutput: 0
