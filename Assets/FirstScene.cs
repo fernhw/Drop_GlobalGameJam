@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ProInputSystem;
 
 public class FirstScene : MonoBehaviour
 {
+    AnalogueInput a;
     // Start is called before the first frame update
     void Start()
     {
-        ProInput.Init();
+       ProInput.Init();
     }
 
     // Update is called once per frame
@@ -17,6 +19,6 @@ public class FirstScene : MonoBehaviour
         ProInput.UpdateInput(Time.deltaTime);
         if (ProInput.A) {
             SceneManager.LoadScene("mainScene");
-        }
+      }
     }
 }
